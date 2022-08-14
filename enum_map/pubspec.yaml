@@ -1,0 +1,10 @@
+name: enum_map
+description: A Map with compile-time check that every enum constant has an entry in it.
+repository: https://github.com/alexeyinkin/dart-enum-map
+version: 0.1.0
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dev_dependencies:
+  total_lints: ^2.17.4
