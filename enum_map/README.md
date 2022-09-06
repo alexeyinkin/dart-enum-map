@@ -1,3 +1,8 @@
+[![Pub Package](https://img.shields.io/pub/v/enum_map.svg)](https://pub.dev/packages/enum_map)
+[![GitHub](https://img.shields.io/github/license/alexeyinkin/dart-enum-map)](https://github.com/alexeyinkin/dart-enum-map/blob/main/LICENSE)
+[![CodeFactor](https://img.shields.io/codefactor/grade/github/alexeyinkin/dart-enum-map?style=flat-square)](https://www.codefactor.io/repository/github/alexeyinkin/dart-enum-map)
+[![Support Chat](https://img.shields.io/badge/support%20chat-telegram-brightgreen)](https://ainkin.com/chat)
+
 A Map with the compile-time check that every `enum` constant has an entry in it.
 
 ## Overview
@@ -10,7 +15,7 @@ enum Fruit { apple, orange, banana }
 ... you can generate the following class:
 
 ```dart
-class FruitMap<V> implements Map<Fruit, V> {
+class FruitMap<V> extends EnumMap<Fruit, V> { // implements Map<Fruit, V>
   FruitMap({
     required this.apple,
     required this.orange,
@@ -44,7 +49,7 @@ Given that your enum is in `fruit.dart`, add:
 2. `@enumMap` or `@unmodifiableEnumMap` annotation, or both.
 
 ```dart
-import 'package:enum_map/annotations.dat';
+import 'package:enum_map/enum_map.dat';
 
 part 'fruit.g.dart';   // Add '.g' to the current file name before '.dart' extension.
 

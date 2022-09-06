@@ -6,7 +6,7 @@ import 'package:source_gen/source_gen.dart';
 
 import '../util/enum_element.dart';
 
-abstract class AbstractEnumMapGenerator<T extends AbstractEnumMap>
+abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
     extends GeneratorForAnnotation<T> {
   @override
   String generateForAnnotatedElement(
@@ -21,7 +21,10 @@ abstract class AbstractEnumMapGenerator<T extends AbstractEnumMap>
 
     buffer.write('class ');
     buffer.write(getClassName(a, e));
-    buffer.writeln('<V> implements Map<${e.name}, V> {');
+    buffer.write('<V> ');
+    buffer.write('extends ');
+    buffer.write(getSuperclassName(a, e));
+    buffer.writeln('<${e.name}, V> {');
 
     buffer.writeln(getConstants(a, e));
     buffer.writeln(getConstructor(a, e));
@@ -78,6 +81,9 @@ abstract class AbstractEnumMapGenerator<T extends AbstractEnumMap>
 
   @protected
   String getClassName(T a, EnumElement e);
+
+  @protected
+  String getSuperclassName(T a, EnumElement e);
 
   @protected
   String getConstants(T a, EnumElement e) {

@@ -5,44 +5,53 @@ import 'package:source_gen/source_gen.dart';
 import 'abstract_map_generator.dart';
 
 class UnmodifiableEnumMapGenerator
-    extends AbstractEnumMapGenerator<UnmodifiableEnumMap> {
+    extends AbstractEnumMapGenerator<GenerateUnmodifiableEnumMap> {
   @override
-  UnmodifiableEnumMap readAnnotation(ConstantReader reader) {
-    return const UnmodifiableEnumMap();
+  GenerateUnmodifiableEnumMap readAnnotation(ConstantReader reader) {
+    return const GenerateUnmodifiableEnumMap();
   }
 
   @override
-  String getClassName(UnmodifiableEnumMap a, EnumElement e) {
+  String getClassName(GenerateUnmodifiableEnumMap a, EnumElement e) {
     return 'Unmodifiable${e.name}Map';
   }
 
   @override
-  String getConstant(UnmodifiableEnumMap a, EnumElement e, FieldElement c) {
+  String getSuperclassName(GenerateUnmodifiableEnumMap a, EnumElement e) {
+    return 'UnmodifiableEnumMap';
+  }
+
+  @override
+  String getConstant(
+    GenerateUnmodifiableEnumMap a,
+    EnumElement e,
+    FieldElement c,
+  ) {
     return 'final V ${c.name}';
   }
 
   @override
-  String getOperatorSetBody(UnmodifiableEnumMap a, EnumElement e) {
+  String getOperatorSetBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
     return 'throw Exception("Cannot modify this map.");';
   }
 
   @override
-  String getAddEntriesBody(UnmodifiableEnumMap a, EnumElement e) {
+  String getAddEntriesBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
     return 'throw Exception("Cannot modify this map.");';
   }
 
   @override
-  String getUpdateBody(UnmodifiableEnumMap a, EnumElement e) {
+  String getUpdateBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
     return 'throw Exception("Cannot modify this map.");';
   }
 
   @override
-  String getUpdateAllBody(UnmodifiableEnumMap a, EnumElement e) {
+  String getUpdateAllBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
     return 'throw Exception("Cannot modify this map.");';
   }
 
   @override
-  String getAddAllBody(UnmodifiableEnumMap a, EnumElement e) {
+  String getAddAllBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
     return 'throw Exception("Cannot modify this map.");';
   }
 }

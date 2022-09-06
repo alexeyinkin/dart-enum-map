@@ -1,4 +1,4 @@
-import 'package:enum_map/annotations.dart';
+import 'package:enum_map/enum_map.dart';
 
 part 'main.g.dart';
 

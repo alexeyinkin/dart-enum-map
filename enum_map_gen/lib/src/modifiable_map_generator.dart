@@ -4,24 +4,30 @@ import 'package:source_gen/source_gen.dart';
 
 import 'abstract_map_generator.dart';
 
-class ModifiableEnumMapGenerator extends AbstractEnumMapGenerator<EnumMap> {
+class ModifiableEnumMapGenerator
+    extends AbstractEnumMapGenerator<GenerateEnumMap> {
   @override
-  EnumMap readAnnotation(ConstantReader reader) {
-    return const EnumMap();
+  GenerateEnumMap readAnnotation(ConstantReader reader) {
+    return const GenerateEnumMap();
   }
 
   @override
-  String getClassName(EnumMap a, EnumElement e) {
+  String getClassName(GenerateEnumMap a, EnumElement e) {
     return '${e.name}Map';
   }
 
   @override
-  String getConstant(EnumMap a, EnumElement e, FieldElement c) {
+  String getSuperclassName(GenerateEnumMap a, EnumElement e) {
+    return 'EnumMap';
+  }
+
+  @override
+  String getConstant(GenerateEnumMap a, EnumElement e, FieldElement c) {
     return 'V ${c.name}';
   }
 
   @override
-  String getConstructor(EnumMap a, EnumElement e) {
+  String getConstructor(GenerateEnumMap a, EnumElement e) {
     return getClassName(a, e) + getConstructorArguments(a, e) + ';\n';
   }
 }

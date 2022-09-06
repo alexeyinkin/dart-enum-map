@@ -6,7 +6,7 @@ part of 'main.dart';
 // ModifiableEnumMapGenerator
 // **************************************************************************
 
-class FruitMap<V> implements Map<Fruit, V> {
+class FruitMap<V> extends EnumMap<Fruit, V> {
   V apple;
   V orange;
   V banana;
@@ -194,7 +194,7 @@ class FruitMap<V> implements Map<Fruit, V> {
 // UnmodifiableEnumMapGenerator
 // **************************************************************************
 
-class UnmodifiableFruitMap<V> implements Map<Fruit, V> {
+class UnmodifiableFruitMap<V> extends UnmodifiableEnumMap<Fruit, V> {
   final V apple;
   final V orange;
   final V banana;

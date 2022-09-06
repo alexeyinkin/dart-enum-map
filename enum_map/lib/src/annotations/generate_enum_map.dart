@@ -1,10 +1,10 @@
-import 'abstract_enum_map.dart';
+import 'abstract_generate_enum_map.dart';
 
 /// Use this annotation on enums to create a modifiable map based on them.
-class EnumMap extends AbstractEnumMap {
+class GenerateEnumMap extends AbstractGenerateEnumMap {
   ///
-  const EnumMap();
+  const GenerateEnumMap();
 }
 
 /// Use this annotation on enums to create a modifiable map based on them.
-const enumMap = EnumMap();
+const enumMap = GenerateEnumMap();

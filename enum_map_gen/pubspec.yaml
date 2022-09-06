@@ -1,7 +1,7 @@
 name: enum_map_gen
 description: A generator for enum_map package, a Map with compile-time check that every enum value has an entry in it.
 repository: https://github.com/alexeyinkin/dart-enum-map
-version: 0.1.0
+version: 0.2.0
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
@@ -9,7 +9,7 @@ environment:
 dependencies:
   analyzer: ^4.5.0
   build: ^2.3.0
-  enum_map: ^0.1.0
+  enum_map: ^0.2.0
   meta: ^1.7.0
   source_gen: ^1.2.2
 
