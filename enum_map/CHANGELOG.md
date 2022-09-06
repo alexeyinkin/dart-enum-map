@@ -1,3 +1,7 @@
+## 0.2.1
+
+* Added 'Support Chat' section to README.
+
 ## 0.2.0
 
 * **BREAKING:** Rename annotation classes from `EnumMap` to `GenerateEnumMap`, `UnmodifiableEnumMap`

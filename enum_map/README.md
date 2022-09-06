@@ -110,3 +110,9 @@ There is however a safety in `get()` method. It uses `switch (key)` to return th
 If you add a value to your enum, the generated file will break the build because there will be
 an uncovered case that does not return a result.
 This will remind you to rebuild your generated files.
+
+## Support Chat
+
+Do you have any questions? Feel free to ask in the [Telegram Support Chat](https://ainkin.com/chat).
+
+Or even just join to say 'Hi!'. I like to hear from the users.
