@@ -13,18 +13,18 @@ class Bar extends Foo {
 }
 
 void main() {
-  late UnmodifiableFruitMap<String> map;
+  late FruitMap<String> map;
 
   setUp(() {
     // ignore: prefer_const_constructors
-    map = UnmodifiableFruitMap<String>(
+    map = FruitMap<String>(
       apple: 'apple',
       banana: 'banana',
       orange: 'orange',
     );
   });
 
-  group('Specific to unmodifiable', () {
+  group('Specific to modifiable', () {
     group('cast', () {
       test('key cannot be non-subtype', () {
         expect(
@@ -42,7 +42,7 @@ void main() {
 
       test('upcast', () {
         // ignore: prefer_const_constructors
-        final map = UnmodifiableFruitMap<Bar>(
+        final map = FruitMap<Bar>(
           apple: Bar('apple'), // ignore: prefer_const_constructors
           banana: Bar('banana'), // ignore: prefer_const_constructors
           orange: Bar('orange'), // ignore: prefer_const_constructors
@@ -57,7 +57,7 @@ void main() {
 
       test('downcast OK', () {
         // ignore: prefer_const_constructors
-        final map = UnmodifiableFruitMap<Foo>(
+        final map = FruitMap<Foo>(
           apple: Bar('apple'), // ignore: prefer_const_constructors
           banana: Bar('banana'), // ignore: prefer_const_constructors
           orange: Bar('orange'), // ignore: prefer_const_constructors
@@ -72,7 +72,7 @@ void main() {
 
       test('downcast TypeError', () {
         // ignore: prefer_const_constructors
-        final map = UnmodifiableFruitMap<Foo>(
+        final map = FruitMap<Foo>(
           apple: Bar('apple'), // ignore: prefer_const_constructors
           banana: Foo('banana'), // ignore: prefer_const_constructors
           orange: Bar('orange'), // ignore: prefer_const_constructors
@@ -86,57 +86,84 @@ void main() {
     });
 
     test('operator []=', () {
-      expect(
-        () => map[Fruit.apple] = 'apple',
-        throwsUnsupportedError,
-      );
+      map[Fruit.apple] = 'a';
+      expect(map.apple, 'a');
     });
 
     test('addEntries', () {
-      expect(
-        () => map.addEntries(const []),
-        throwsUnsupportedError,
-      );
-      expect(
-        () => map.addEntries(const [MapEntry(Fruit.apple, 'a')]),
-        throwsUnsupportedError,
-      );
+      map.addEntries(const []);
+
+      expect(map.length, 3);
+      expect(map.apple, 'apple');
+      expect(map.orange, 'orange');
+      expect(map.banana, 'banana');
+
+      map.addEntries(const [
+        MapEntry(Fruit.orange, 'o'),
+        MapEntry(Fruit.banana, 'b'),
+      ]);
+
+      expect(map.length, 3);
+      expect(map.apple, 'apple');
+      expect(map.orange, 'o');
+      expect(map.banana, 'b');
     });
 
     test('update', () {
-      expect(
-        () => map.update(Fruit.apple, (v) => v),
-        throwsUnsupportedError,
+      map.update(
+        Fruit.apple,
+        (v) => v.toUpperCase(),
       );
-      expect(
-        () => map.update(Fruit.apple, (v) => v, ifAbsent: () => 'a'),
-        throwsUnsupportedError,
+      map.update(
+        Fruit.orange,
+        (v) => v.toUpperCase(),
+        ifAbsent: () => throw Exception(),
       );
+
+      expect(map.length, 3);
+      expect(map.apple, 'APPLE');
+      expect(map.orange, 'ORANGE');
+      expect(map.banana, 'banana');
     });
 
     test('updateAll', () {
-      expect(
-        () => map.updateAll((key, value) => 'a'),
-        throwsUnsupportedError,
-      );
+      map.updateAll((key, value) => '${key.name}-$value');
+
+      expect(map.length, 3);
+      expect(map.apple, 'apple-apple');
+      expect(map.orange, 'orange-orange');
+      expect(map.banana, 'banana-banana');
     });
 
     test('putIfAbsent', () {
-      expect(
-        () => map.putIfAbsent(Fruit.apple, () => 'a'),
-        throwsUnsupportedError,
-      );
+      map.putIfAbsent(Fruit.apple, () => 'a');
+
+      expect(map.length, 3);
+      expect(map.apple, 'apple');
+      expect(map.orange, 'orange');
+      expect(map.banana, 'banana');
     });
 
     test('addAll', () {
-      expect(
-        () => map.addAll(const {}),
-        throwsUnsupportedError,
-      );
-      expect(
-        () => map.addAll(const {Fruit.apple: 'a'}),
-        throwsUnsupportedError,
-      );
+      map.addAll({});
+      map.addAll({
+        Fruit.apple: 'a',
+        Fruit.orange: 'o',
+      });
+
+      expect(map.length, 3);
+      expect(map.apple, 'a');
+      expect(map.orange, 'o');
+      expect(map.banana, 'banana');
+    });
+
+    test('Fields', () {
+      map.apple = 'a';
+
+      expect(map.length, 3);
+      expect(map[Fruit.apple], 'a');
+      expect(map[Fruit.orange], 'orange');
+      expect(map[Fruit.banana], 'banana');
     });
   });
 

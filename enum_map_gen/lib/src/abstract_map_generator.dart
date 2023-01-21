@@ -8,6 +8,9 @@ import '../util/enum_element.dart';
 
 abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
     extends GeneratorForAnnotation<T> {
+  static const _throwUnsupportedError =
+      "throw UnsupportedError('Cannot remove objects from this map');";
+
   @override
   String generateForAnnotatedElement(
     Element element,
@@ -346,7 +349,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
 
   @protected
   String getRemoveWhereBody(T a, EnumElement e) {
-    return 'throw Exception("Objects in this map cannot be removed.");';
+    return _throwUnsupportedError;
   }
 
   @protected
@@ -380,7 +383,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
 
   @protected
   String getRemoveBody(T a, EnumElement e) {
-    return 'throw Exception("Objects in this map cannot be removed.");';
+    return _throwUnsupportedError;
   }
 
   @protected
@@ -390,7 +393,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
 
   @protected
   String getClearBody(T a, EnumElement e) {
-    return 'throw Exception("Objects in this map cannot be removed.");';
+    return _throwUnsupportedError;
   }
 
   @protected
@@ -433,13 +436,13 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
 
   @protected
   String getValuesBody(T a, EnumElement e) {
-    final buffer = StringBuffer('return [\n');
+    final buffer = StringBuffer('return List.unmodifiable([\n');
 
     for (final c in e.constants) {
       buffer.writeln('this.${c.name},');
     }
 
-    buffer.writeln('];');
+    buffer.writeln(']);');
     return buffer.toString();
   }
 
