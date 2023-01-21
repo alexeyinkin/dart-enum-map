@@ -101,7 +101,7 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
 
   @override
   void removeWhere(bool test(Fruit key, V value)) {
-    throw Exception("Objects in this map cannot be removed.");
+    throw UnsupportedError('Cannot remove objects from this map');
   }
 
   @override
@@ -116,12 +116,12 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
 
   @override
   V? remove(Object? key) {
-    throw Exception("Objects in this map cannot be removed.");
+    throw UnsupportedError('Cannot remove objects from this map');
   }
 
   @override
   void clear() {
-    throw Exception("Objects in this map cannot be removed.");
+    throw UnsupportedError('Cannot remove objects from this map');
   }
 
   @override
@@ -138,11 +138,11 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
 
   @override
   Iterable<V> get values {
-    return [
+    return List.unmodifiable([
       this.apple,
       this.orange,
       this.banana,
-    ];
+    ]);
   }
 
   @override

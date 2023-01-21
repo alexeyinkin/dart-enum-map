@@ -6,6 +6,9 @@ import 'abstract_map_generator.dart';
 
 class UnmodifiableEnumMapGenerator
     extends AbstractEnumMapGenerator<GenerateUnmodifiableEnumMap> {
+  static const _throwUnsupportedError =
+      "throw UnsupportedError('Cannot modify unmodifiable map');";
+
   @override
   GenerateUnmodifiableEnumMap readAnnotation(ConstantReader reader) {
     return const GenerateUnmodifiableEnumMap();
@@ -32,26 +35,31 @@ class UnmodifiableEnumMapGenerator
 
   @override
   String getOperatorSetBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
-    return 'throw Exception("Cannot modify this map.");';
+    return _throwUnsupportedError;
   }
 
   @override
   String getAddEntriesBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
-    return 'throw Exception("Cannot modify this map.");';
+    return _throwUnsupportedError;
   }
 
   @override
   String getUpdateBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
-    return 'throw Exception("Cannot modify this map.");';
+    return _throwUnsupportedError;
   }
 
   @override
   String getUpdateAllBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
-    return 'throw Exception("Cannot modify this map.");';
+    return _throwUnsupportedError;
   }
 
   @override
   String getAddAllBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
-    return 'throw Exception("Cannot modify this map.");';
+    return _throwUnsupportedError;
+  }
+
+  @override
+  String getPutIfAbsentBody(GenerateUnmodifiableEnumMap a, EnumElement e) {
+    return _throwUnsupportedError;
   }
 }
