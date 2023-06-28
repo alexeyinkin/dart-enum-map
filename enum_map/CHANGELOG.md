@@ -1,3 +1,7 @@
+## 0.3.0
+
+* Upgraded total_lints to v3.0.0.
+
 ## 0.2.1
 
 * Added 'Support Chat' section to README.

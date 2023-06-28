@@ -174,6 +174,8 @@ void main() {
       expect(map.containsValue('orange'), true);
 
       expect(map.containsValue('kiwi'), false);
+
+      // ignore: collection_methods_unrelated_type
       expect(map.containsValue(DateTime(2022)), false);
     });
 
@@ -183,6 +185,8 @@ void main() {
       expect(map.containsKey(Fruit.orange), true);
 
       expect(map.containsKey(null), false);
+
+      // ignore: collection_methods_unrelated_type
       expect(map.containsKey(DateTime(2022)), false);
     });
 
@@ -192,6 +196,8 @@ void main() {
       expect(map[Fruit.orange], 'orange');
 
       expect(map[null], null);
+
+      // ignore: collection_methods_unrelated_type
       expect(map[DateTime(2022)], null);
     });
 
@@ -235,6 +241,7 @@ void main() {
         throwsUnsupportedError,
       );
       expect(
+        // ignore: collection_methods_unrelated_type
         () => map.remove(DateTime(2022)),
         throwsUnsupportedError,
       );

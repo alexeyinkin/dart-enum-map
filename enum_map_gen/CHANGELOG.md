@@ -5,6 +5,7 @@
   an always-existing value.
 * Added golden tests for generation result.
 * Added tests on goldens.
+* Fixed linter issues on output.
 
 ## 0.2.0
 

@@ -259,8 +259,8 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
   @protected
   String getMap(T a, EnumElement e) {
     return '@override\n'
-            'Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> transform(${e.name} key, '
-            'V value)) {\n' +
+            'Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> Function(${e.name} key, '
+            'V value) transform,) {\n' +
         getMapBody(a, e) +
         '}\n';
   }
@@ -296,7 +296,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
 
   @protected
   String getAddEntriesBody(T a, EnumElement e) {
-    return 'for (final e in newEntries) this[e.key] = e.value;\n';
+    return 'for (final e in newEntries) { this[e.key] = e.value; }\n';
   }
 
   @protected
@@ -304,7 +304,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
     return '@override\n'
             'V update('
             '${e.name} key, '
-            'V update(V value), '
+            'V Function(V value) update, '
             '{V Function()? ifAbsent}) {\n' +
         getUpdateBody(a, e) +
         '}\n';
@@ -318,7 +318,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
   @protected
   String getUpdateAll(T a, EnumElement e) {
     return '@override\n'
-            'void updateAll(V update(${e.name} key, V value)) {\n' +
+            'void updateAll(V Function(${e.name} key, V value) update) {\n' +
         getUpdateAllBody(a, e) +
         '}\n';
   }
@@ -342,7 +342,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
   @protected
   String getRemoveWhere(T a, EnumElement e) {
     return '@override\n'
-            'void removeWhere(bool test(${e.name} key, V value)) {\n' +
+            'void removeWhere(bool Function(${e.name} key, V value) test) {\n' +
         getRemoveWhereBody(a, e) +
         '}\n';
   }
@@ -354,7 +354,8 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
 
   @protected
   String getPutIfAbsent(T a, EnumElement e) {
-    return '@override\n' 'V putIfAbsent(${e.name} key, V ifAbsent()) {\n' +
+    return '@override\n'
+            'V putIfAbsent(${e.name} key, V Function() ifAbsent) {\n' +
         getPutIfAbsentBody(a, e) +
         '}\n';
   }
@@ -371,7 +372,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
 
   @protected
   String getAddAllBody(T a, EnumElement e) {
-    return 'for (final e in other.entries) this[e.key] = e.value;';
+    return 'for (final e in other.entries) { this[e.key] = e.value; }';
   }
 
   @protected
@@ -399,7 +400,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
   @protected
   String getForEach(T a, EnumElement e) {
     return '@override\n'
-            'void forEach(void action(${e.name} key, V value)) {\n' +
+            'void forEach(void Function(${e.name} key, V value) action) {\n' +
         getForEachBody(a, e) +
         '}\n';
   }
@@ -480,7 +481,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
 
   @protected
   String getGet(T a, EnumElement e) {
-    return 'V get(${e.name} key) {' + getGetBody(a, e) + '}\n';
+    return '@override\n' 'V get(${e.name} key) {' + getGetBody(a, e) + '}\n';
   }
 
   @protected
@@ -495,22 +496,22 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
 
   @protected
   String getToStringBody(T a, EnumElement e) {
-    final buffer = StringBuffer('final buffer = StringBuffer("{");');
+    final buffer = StringBuffer('final buffer = StringBuffer(\'{\');');
     bool first = true;
 
     for (final constant in e.constants) {
       if (!first) {
-        buffer.writeln('buffer.write(", ");');
+        buffer.writeln('buffer.write(\', \');');
       }
 
       buffer.writeln(
-        'buffer.write("${e.name}.${constant.name}: '
-        '\${this.${constant.name}}");',
+        'buffer.write(\'${e.name}.${constant.name}: '
+        '\${this.${constant.name}}\');',
       );
       first = false;
     }
 
-    buffer.writeln('buffer.write("}");');
+    buffer.writeln('buffer.write(\'}\');');
     buffer.writeln('return buffer.toString();');
     return buffer.toString();
   }

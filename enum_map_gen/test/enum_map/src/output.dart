@@ -71,7 +71,9 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
   }
 
   @override
-  Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> transform(Fruit key, V value)) {
+  Map<K2, V2> map<K2, V2>(
+    MapEntry<K2, V2> Function(Fruit key, V value) transform,
+  ) {
     final apple = transform(Fruit.apple, this.apple);
     final orange = transform(Fruit.orange, this.orange);
     final banana = transform(Fruit.banana, this.banana);
@@ -84,34 +86,38 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
 
   @override
   void addEntries(Iterable<MapEntry<Fruit, V>> newEntries) {
-    for (final e in newEntries) this[e.key] = e.value;
+    for (final e in newEntries) {
+      this[e.key] = e.value;
+    }
   }
 
   @override
-  V update(Fruit key, V update(V value), {V Function()? ifAbsent}) {
+  V update(Fruit key, V Function(V value) update, {V Function()? ifAbsent}) {
     return this[key] = update(this.get(key));
   }
 
   @override
-  void updateAll(V update(Fruit key, V value)) {
+  void updateAll(V Function(Fruit key, V value) update) {
     this.apple = update(Fruit.apple, this.apple);
     this.orange = update(Fruit.orange, this.orange);
     this.banana = update(Fruit.banana, this.banana);
   }
 
   @override
-  void removeWhere(bool test(Fruit key, V value)) {
+  void removeWhere(bool Function(Fruit key, V value) test) {
     throw UnsupportedError('Cannot remove objects from this map');
   }
 
   @override
-  V putIfAbsent(Fruit key, V ifAbsent()) {
+  V putIfAbsent(Fruit key, V Function() ifAbsent) {
     return this.get(key);
   }
 
   @override
   void addAll(Map<Fruit, V> other) {
-    for (final e in other.entries) this[e.key] = e.value;
+    for (final e in other.entries) {
+      this[e.key] = e.value;
+    }
   }
 
   @override
@@ -125,7 +131,7 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
   }
 
   @override
-  void forEach(void action(Fruit key, V value)) {
+  void forEach(void Function(Fruit key, V value) action) {
     action(Fruit.apple, this.apple);
     action(Fruit.orange, this.orange);
     action(Fruit.banana, this.banana);
@@ -160,6 +166,7 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
     return true;
   }
 
+  @override
   V get(Fruit key) {
     switch (key) {
       case Fruit.apple:
@@ -173,13 +180,13 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
 
   @override
   String toString() {
-    final buffer = StringBuffer("{");
-    buffer.write("Fruit.apple: ${this.apple}");
-    buffer.write(", ");
-    buffer.write("Fruit.orange: ${this.orange}");
-    buffer.write(", ");
-    buffer.write("Fruit.banana: ${this.banana}");
-    buffer.write("}");
+    final buffer = StringBuffer('{');
+    buffer.write('Fruit.apple: ${this.apple}');
+    buffer.write(', ');
+    buffer.write('Fruit.orange: ${this.orange}');
+    buffer.write(', ');
+    buffer.write('Fruit.banana: ${this.banana}');
+    buffer.write('}');
     return buffer.toString();
   }
 }

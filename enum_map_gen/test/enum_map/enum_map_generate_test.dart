@@ -1,7 +1,5 @@
-@TestOn('vm')
 import 'package:enum_map_gen/src/modifiable_map_generator.dart';
-import 'package:source_gen_test/source_gen_test.dart';
-import 'package:test/test.dart';
+import 'package:source_gen_test_golden/source_gen_test_golden.dart';
 
 Future<void> main() async {
   initializeBuildLogTracking();
