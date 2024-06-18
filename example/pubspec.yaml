@@ -1,0 +1,6 @@
+name: enum_map_example
+environment:
+  sdk: ^3.5.0-152
+
+dependencies:
+  enum_map: { path: ../ }

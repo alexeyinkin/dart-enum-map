@@ -1,5 +1,0 @@
-include: package:total_lints/app.yaml
-
-linter:
-  rules:
-    prefer_interpolation_to_compose_strings: false
