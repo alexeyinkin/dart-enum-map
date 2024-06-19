@@ -403,7 +403,7 @@ abstract class _MakeMapBase implements ClassTypesMacro, ClassDeclarationsMacro {
 
 /// Creates a modifiable map based on an enum.
 macro class MakeMap extends _MakeMapBase {
-  // ignore: public_member_api_docs
+  /// Creates a modifiable map based on an enum.
   const MakeMap();
 
   @override
@@ -548,7 +548,7 @@ macro class MakeMap extends _MakeMapBase {
 
 /// Creates an unmodifiable map based on an enum.
 macro class MakeUnmodifiableMap extends _MakeMapBase {
-  // ignore: public_member_api_docs
+  /// Creates an unmodifiable map based on an enum.
   const MakeUnmodifiableMap();
 
   @override

@@ -1,3 +1,8 @@
+## 0.4.0-2.dev
+
+* Relaxed the minimal [meta](https://pub.dev/packages/meta) version to `1.14.0`.
+* Added pub.dev topics: collections, macros, enum.
+
 ## 0.4.0-1.dev
 
 * **BREAKING:** Rewritten as macros: `@MakeMap()`, `@MakeUnmodifiableMap()`.
