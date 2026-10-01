@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'src/input.dart';
 
 class Foo {
-  final String value;
+  final String value; // ignore: unreachable_from_main
 
   const Foo(this.value);
 }

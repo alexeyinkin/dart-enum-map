@@ -1,5 +1,5 @@
 import 'package:enum_map_gen/src/modifiable_map_generator.dart';
-import 'package:source_gen_test_golden/source_gen_test_golden.dart';
+import 'package:source_gen_test/source_gen_test.dart';
 
 Future<void> main() async {
   initializeBuildLogTracking();

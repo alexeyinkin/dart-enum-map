@@ -1,3 +1,7 @@
+## 0.3.1
+
+* Using [https://pub.dev/packages/source_gen_test](source_gen_test) for testing generated code.
+
 ## 0.3.0
 
 * **BREAKING:** Unsupported operations throw `UnsupportedError` instead of `Exception`.
