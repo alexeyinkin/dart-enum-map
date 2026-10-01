@@ -4,8 +4,6 @@ import 'package:enum_map/annotations.dart';
 import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 
-import '../util/enum_element.dart';
-
 abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
     extends GeneratorForAnnotation<T> {
   static const _throwUnsupportedError =
@@ -248,7 +246,7 @@ abstract class AbstractEnumMapGenerator<T extends AbstractGenerateEnumMap>
         'MapEntry<${e.name}, V>('
         '${e.name}.${constant.name}, '
         'this.${constant.name}'
-        '),\n',
+        '),',
       );
     }
 

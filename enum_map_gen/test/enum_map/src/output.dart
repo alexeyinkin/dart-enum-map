@@ -5,11 +5,7 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
   V orange;
   V banana;
 
-  FruitMap({
-    required this.apple,
-    required this.orange,
-    required this.banana,
-  });
+  FruitMap({required this.apple, required this.orange, required this.banana});
 
   @override
   Map<RK, RV> cast<RK, RV>() {
@@ -144,11 +140,7 @@ class FruitMap<V> extends EnumMap<Fruit, V> {
 
   @override
   Iterable<V> get values {
-    return List.unmodifiable([
-      this.apple,
-      this.orange,
-      this.banana,
-    ]);
+    return List.unmodifiable([this.apple, this.orange, this.banana]);
   }
 
   @override

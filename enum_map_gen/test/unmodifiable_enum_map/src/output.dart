@@ -125,11 +125,7 @@ class UnmodifiableFruitMap<V> extends UnmodifiableEnumMap<Fruit, V> {
 
   @override
   Iterable<V> get values {
-    return List.unmodifiable([
-      this.apple,
-      this.orange,
-      this.banana,
-    ]);
+    return List.unmodifiable([this.apple, this.orange, this.banana]);
   }
 
   @override

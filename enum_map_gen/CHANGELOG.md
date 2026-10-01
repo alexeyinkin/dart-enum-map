@@ -1,6 +1,14 @@
+## 0.3.2
+
+* Require `analyzer` 8.1.1 or later, `source_gen` 4.x, and `build` 3.x or 4.x.
+  This supports `analyzer` up to 14.x. Projects on older `analyzer` versions resolve 0.3.1.
+* **BREAKING:** Removed the `MyEnumElement` extension.
+  Use `EnumElement.constants` from `analyzer` instead.
+* Fixed blank lines between entries in the generated `entries` getter.
+
 ## 0.3.1
 
-* Using [https://pub.dev/packages/source_gen_test](source_gen_test) for testing generated code.
+* Using [source_gen_test](https://pub.dev/packages/source_gen_test) for testing generated code.
 
 ## 0.3.0
 
